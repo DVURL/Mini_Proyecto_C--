@@ -3,7 +3,7 @@
  * BOOTCAMP PROGRAMACIÓN CERO A POO | MINI-PROYECTO C++
  * Proyecto    : Gestor de Videojuegos
  * Autor       : URIEL JARAMILLO
- * Fecha       : 25-oct-2026
+ * Fecha       : 28-oct-2026
  * Descripción : Sistema de gestión en consola para registrar, consultar
  *               y analizar una biblioteca de hasta 20 videojuegos.
  *
@@ -48,6 +48,18 @@ void mostrarMenu() {
     cout << "~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
 
+int leerOpcion() {
+    int opcion;
+    cout << "Elige una opcion :v : ";
+    cin >> opcion;
+
+    while (opcion < 1 || opcion > 6) {
+        cout << "Ingresa un dato valido [1-6] ;w : ";
+        cin >> opcion;
+    }
+    return opcion;
+}
+
 int main() {
 
     // Arreglos paralelos: el mismo índice pertenece al mismo juego
@@ -63,8 +75,7 @@ int main() {
 
         // Solicitar al usuario que elija una opción del menú
 
-        cout << "Elige una opcion :v : " << endl;
-        cin >> opcion;
+        opcion = leerOpcion();
         cout << "~~~~~~~~~~~~~~~~~~~~~~~" << endl;
         cout << "" << endl;
         
