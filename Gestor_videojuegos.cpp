@@ -48,16 +48,69 @@ void mostrarMenu() {
     cout << "~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
 
+// Lee la opcion y la repite hasta que este entre 1 y 6
+
 int leerOpcion() {
     int opcion;
     cout << "Elige una opcion :v : ";
     cin >> opcion;
 
     while (opcion < 1 || opcion > 6) {
+        cout << "" << endl;
         cout << "Ingresa un dato valido [1-6] ;w : ";
         cin >> opcion;
     }
     return opcion;
+}
+
+// Registra un juego y devuelve el total actualizado
+
+int registrarJuego(string titulos[], float horas[], int calificacion[], int total) {
+
+    if (total >= maximoPermitido) {
+        cout << "Tu biblioteca esta llena (20/20) :(" << endl;
+        cout << "" << endl;
+        return total;
+    }
+
+    cout << "Titulo del juego (una palabra): ";
+    cin >> titulos[total];
+    cout << "" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+    cout << "" << endl;
+    cout << "Horas jugadas: ";
+    cin >> horas[total];
+    cout << "" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "" << endl;
+    while (horas[total] < 0) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Las horas no pueden ser negativas ;w : ";
+        cin >> horas[total];
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+
+    }
+
+    cout << "" << endl;
+    cout << "Calificacion (1-10): ";
+    cin >> calificacion[total];
+    cout << "" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "" << endl;
+    while (calificacion[total] < 1 || calificacion[total] > 10) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "La calificacion debe estar entre 1 y 10 ;w : ";
+        cin >> calificacion[total];
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+    }
+
+    cout << "" << endl;
+    cout << "=====================" << endl;
+    cout << "Juego registrado :v" << endl;
+    cout << "=====================" << endl;
+    cout << "" << endl;
+    return total + 1;
 }
 
 int main() {
@@ -82,7 +135,7 @@ int main() {
         // Validar la opción ingresada y mostrar un mensaje correspondiente
 
         switch (opcion) {
-            case 1: cout << "Registrando: preparando ejecución..." << endl; break;
+            case 1: total = registrarJuego(titulos, horas, calificacion, total); break;
             case 2: cout << "Mostrar: preparando ejecución..." << endl; break;
             case 3: cout << "Buscar: preparando ejecución..." << endl; break;
             case 4: cout << "Reporte: preparando ejecución..." << endl; break;
