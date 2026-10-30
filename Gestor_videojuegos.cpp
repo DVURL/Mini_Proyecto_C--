@@ -113,6 +113,34 @@ int registrarJuego(string titulos[], float horas[], int calificacion[], int tota
     return total + 1;
 }
 
+// Muestra todos los juegos registrados
+
+void mostrarJuegos(string titulos[], float horas[], int calificacion[], int total) {
+
+    if (total == 0) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Todavia no hay juegos registrados :(" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+        return;
+    }
+
+    cout << "=~=~=~=~=~ MI BIBLIOTECA =~=~=~=~=~" << endl;
+    cout << "" << endl;
+    for (int i = 0; i < total; i++) {
+        cout << "-------------------------------------------" << endl;
+        cout << "" << endl;
+        cout << (i + 1) << ". " << titulos[i] << endl;
+        cout << "" << endl;
+        cout << "   Horas jugadas: " << horas[i] << endl;
+        cout << "" << endl;
+        cout << "   Calificacion : " << calificacion[i] << "/10" << endl;
+        cout << "" << endl;
+        cout << "-------------------------------------------" << endl;
+        cout << "" << endl;
+    }
+}
+
 int main() {
 
     // Arreglos paralelos: el mismo índice pertenece al mismo juego
@@ -136,7 +164,7 @@ int main() {
 
         switch (opcion) {
             case 1: total = registrarJuego(titulos, horas, calificacion, total); break;
-            case 2: cout << "Mostrar: preparando ejecución..." << endl; break;
+            case 2: mostrarJuegos(titulos, horas, calificacion, total); break;
             case 3: cout << "Buscar: preparando ejecución..." << endl; break;
             case 4: cout << "Reporte: preparando ejecución..." << endl; break;
             case 5: cout << "Rejugar: preparando ejecución..." << endl; break;
