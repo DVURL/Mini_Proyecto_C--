@@ -141,6 +141,135 @@ void mostrarJuegos(string titulos[], float horas[], int calificacion[], int tota
     }
 }
 
+// Busca un juego por titulo recorriendo el arreglo uno por uno
+
+void buscarJuego(string titulos[], float horas[], int calificacion[], int total) {
+
+    if (total == 0) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Todavia no hay juegos registrados :(" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+        return;
+    }
+
+    string buscado;
+    bool encontrado = false;
+
+    cout << "=~=~=~=~=~ BUSCAR UN JUEGO =~=~=~=~=~" << endl;
+    cout << "" << endl;
+    cout << "Titulo a buscar (una palabra): ";
+    cin >> buscado;
+    cout << "" << endl;
+
+    for (int i = 0; i < total; i++) {
+        if (titulos[i] == buscado) {
+            cout << "-------------------------------------------" << endl;
+            cout << "" << endl;
+            cout << "Juego encontrado :v" << endl;
+            cout << "" << endl;
+            cout << (i + 1) << ". " << titulos[i] << endl;
+            cout << "" << endl;
+            cout << "   Horas jugadas: " << horas[i] << endl;
+            cout << "" << endl;
+            cout << "   Calificacion : " << calificacion[i] << "/10" << endl;
+            cout << "" << endl;
+            cout << "-------------------------------------------" << endl;
+            cout << "" << endl;
+            encontrado = true;
+        }
+    }
+
+    if (encontrado == false) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "No existe un juego con ese titulo :(" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+    }
+}
+
+// Muestra el promedio de calificacion y el juego con mas horas
+
+void mostrarReporte(string titulos[], float horas[], int calificacion[], int total) {
+
+    if (total == 0) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Todavia no hay juegos registrados :(" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+        return;
+    }
+
+    float suma = 0;
+    int posicionMayor = 0;
+
+    for (int i = 0; i < total; i++) {
+        suma = suma + calificacion[i];
+        if (horas[i] > horas[posicionMayor]) {
+            posicionMayor = i;
+        }
+    }
+
+    cout << "=~=~=~=~=~ REPORTE GENERAL =~=~=~=~=~" << endl;
+    cout << "" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "" << endl;
+    cout << "   Juegos registrados      : " << total << endl;
+    cout << "" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "" << endl;
+    cout << "   Promedio de calificacion: " << suma / total << endl;
+    cout << "" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "" << endl;
+    cout << "   Juego con mas horas     : " << titulos[posicionMayor] << endl;
+    cout << "   Horas jugadas           : " << horas[posicionMayor] << endl;
+    cout << "" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "" << endl;
+}
+
+// Recomienda juegos con calificacion alta y pocas horas jugadas
+
+void recomendarRejugar(string titulos[], float horas[], int calificacion[], int total) {
+
+    if (total == 0) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Todavia no hay juegos registrados :(" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+        return;
+    }
+
+    bool hayRecomendados = false;
+
+    cout << "=~=~=~=~=~ QUE REJUGAR? =~=~=~=~=~" << endl;
+    cout << "" << endl;
+
+    for (int i = 0; i < total; i++) {
+        if (calificacion[i] >= 9 && horas[i] < 10) {
+            cout << "-------------------------------------------" << endl;
+            cout << "" << endl;
+            cout << "   " << titulos[i] << endl;
+            cout << "" << endl;
+            cout << "   Calificacion : " << calificacion[i] << "/10" << endl;
+            cout << "" << endl;
+            cout << "   Horas jugadas: " << horas[i] << " (casi no lo jugaste!)" << endl;
+            cout << "" << endl;
+            cout << "-------------------------------------------" << endl;
+            cout << "" << endl;
+            hayRecomendados = true;
+        }
+    }
+
+    if (hayRecomendados == false) {
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "Ningun juego cumple: calificacion 9+ y menos de 10 horas" << endl;
+        cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << endl;
+        cout << "" << endl;
+    }
+}
+
 int main() {
 
     // Arreglos paralelos: el mismo índice pertenece al mismo juego
@@ -165,9 +294,9 @@ int main() {
         switch (opcion) {
             case 1: total = registrarJuego(titulos, horas, calificacion, total); break;
             case 2: mostrarJuegos(titulos, horas, calificacion, total); break;
-            case 3: cout << "Buscar: preparando ejecución..." << endl; break;
-            case 4: cout << "Reporte: preparando ejecución..." << endl; break;
-            case 5: cout << "Rejugar: preparando ejecución..." << endl; break;
+            case 3: buscarJuego(titulos, horas, calificacion, total); break;
+            case 4: mostrarReporte(titulos, horas, calificacion, total); break;
+            case 5: recomendarRejugar(titulos, horas, calificacion, total); break;
             case 6: cout << "Bay Bay :(" << endl; break;
             default: cout << "Ingresa un dato válido [1-6] ;w" << endl;
         }
